@@ -1,0 +1,35 @@
+
+<button class="btn btn-info" (click)=addItems()>Renew</button>
+
+<table class="table table-bordered" >
+<thead>
+<tr>
+  <th>#</th>
+  <th>Title</th>
+  <th>Language</th>
+  <th>Actions</th>
+</tr>
+</thead>
+<tbody>
+  <tr *ngFor="let book of bookArr">
+      <th>
+          {{book.id}}
+      </th>
+      <td>
+          {{book.title}}
+          <img class="img-thumbnail rounded float-left" [src]='book.imageSource' width="150" height="220"/>
+      </td>
+      <td>
+        {{book.language}}
+      </td>
+      <td>
+
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <a class="btn btn-info" (click)=editBook(book.id)>Edit</a>
+        <button class="btn btn-danger" (click)=deleteBook(book.id)>Delete</button>
+      </div>
+      </td>
+  </tr>
+</tbody>
+</table>
+

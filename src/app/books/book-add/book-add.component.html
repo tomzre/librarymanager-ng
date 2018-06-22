@@ -1,0 +1,29 @@
+<form (ngSubmit)="onSubmit()" #bookform="ngForm">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="title">Title</label>
+        <input [(ngModel)]="book.title" name="title" type="text" class="form-control" id="bookTitle" placeholder="Title">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="bookLanguage">Language</label>
+        <input [(ngModel)]="book.language" name="language" type="text" class="form-control" id="bookLanguage" placeholder="Language">
+      </div>
+    </div>
+    <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="inputAddress">Year</label>
+      <input [(ngModel)]="book.year" name="year" type="number" class="form-control" id="bookYear" placeholder="Year">
+    </div>
+    <div class="form-group col-md-4">
+        <label for="inputAddress">Pages</label>
+        <input [(ngModel)]="book.pages" name="pages" type="number" class="form-control" id="bookPages" placeholder="Pages">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputCity">Image Source</label>
+        <input [(ngModel)]="book.imageSource" name="imageSource" type="text" class="form-control" id="inputCity" placeholder="http://">
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+  </form>
