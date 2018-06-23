@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { HttpBookService } from './services/http-book.service';
 
 import { NgModule } from '@angular/core';
@@ -5,7 +6,6 @@ import { CommonModule } from '@angular/common';
 import { BookListComponent } from './book-list/book-list.component';
 import { BookEditComponent } from './book-edit/book-edit.component';
 import { BookAddComponent } from './book-add/book-add.component';
-import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [

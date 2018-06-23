@@ -22,20 +22,16 @@ export class BookEditComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => this.id = params.id);
 
-    this.book = this.getBooks(this.id);
-
-    console.log(this.book);
+    this.getBook(this.id);
 
   }
 
-  private getBooks(id: number): Book {
+  private getBook(id: number): void {
     this.bookService.getBookById(id).subscribe(
       data => {
         this.book = data as Book;
       }
     );
-    // tslint:disable-next-line:triple-equals
-    return this.books.find(x => x.id == id);
   }
 
   onSubmit(): void {
