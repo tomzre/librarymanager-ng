@@ -12,6 +12,7 @@ export class BookListComponent implements OnInit {
 
   bookArr: Book[];
   router: Router;
+  errors: any;
 
   constructor(router: Router, private bookService: HttpBookService) {
     this.router = router;
@@ -25,16 +26,11 @@ export class BookListComponent implements OnInit {
      this.bookService.getBooks().subscribe(
       data => {
         this.bookArr = data as Book[];
+      },
+      err => {
+        this.errors = err;
       }
     );
-  }
-
-  addItems(): void {
-    this.bookArr = [ new Book(1, 'title', 1, 2008, 'GB', 289, 1, 'http://kreatywna-okladka.pl/public/upload/catalog/product/10/minigallery/thumb_page_1450734301Forbes.png'),
-    new Book(2, 'title2', 1, 1999, 'PL', 2100, 4, 'https://images-na.ssl-images-amazon.com/images/I/81EjDm%2BYl8L.jpg')
-                ];
-
-    // this.bookService.saveBooks(this.bookArr);
   }
 
   editBook(id: number): void {

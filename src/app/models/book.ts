@@ -16,7 +16,7 @@ export class Book {
             language: string,
             pages: number,
             typeId: number,
-            imageSource: string) {
+          imageSource: string) {
 
     this.id = id;
     this.title = title;

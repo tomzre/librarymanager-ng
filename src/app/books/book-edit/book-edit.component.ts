@@ -23,7 +23,6 @@ export class BookEditComponent implements OnInit {
     this.route.params.subscribe(params => this.id = params.id);
 
     this.getBook(this.id);
-
   }
 
   private getBook(id: number): void {

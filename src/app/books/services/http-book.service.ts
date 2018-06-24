@@ -22,5 +22,4 @@ export class HttpBookService {
     getBookById(id: number) {
       return this.http.get(this.url + 'books/' + id);
     }
-
 }
