@@ -1,25 +1,19 @@
+import { DataService } from './../../services/data.service';
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class HttpBookService {
+export class HttpBookService extends DataService {
 
-    readonly url: string = 'http://localhost:50165/';
     readonly httpOptions = {
       header: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
 
-  constructor(private http: HttpClient) { }
-
-    getBooks() {
-      return this.http.get(this.url + 'books');
-    }
-
-    getBookById(id: number) {
-      return this.http.get(this.url + 'books/' + id);
-    }
+    constructor(http: HttpClient) {
+      super('http://localhost:50165/books', http);
+     }
 }

@@ -1,7 +1,9 @@
+import { NotFoundError } from './../../common/not-found-error';
 import { HttpBookService } from './../services/http-book.service';
 import { Component, OnInit } from '@angular/core';
 import { Book } from '../../models/book';
 import { Router } from '@angular/router';
+import { AppError } from '../../common/app-error';
 
 @Component({
   selector: 'app-book-list',
@@ -12,7 +14,6 @@ export class BookListComponent implements OnInit {
 
   bookArr: Book[];
   router: Router;
-  errors: any;
 
   constructor(router: Router, private bookService: HttpBookService) {
     this.router = router;
@@ -22,13 +23,17 @@ export class BookListComponent implements OnInit {
    this.getBooks();
 }
 
-  getBooks(): void {
-     this.bookService.getBooks().subscribe(
+  private getBooks(): void {
+     this.bookService.getAll().subscribe(
       data => {
         this.bookArr = data as Book[];
       },
-      err => {
-        this.errors = err;
+      (error: AppError) => {
+        if (error instanceof NotFoundError) {
+          throw error;
+        } else {
+          throw error;
+        }
       }
     );
   }
