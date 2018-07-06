@@ -7,11 +7,19 @@ import { of } from 'rxjs/internal/observable/of';
 import { Observable } from 'rxjs/internal/Observable';
 import { NotFoundError } from '../common/not-found-error';
 import { throwError } from 'rxjs/internal/observable/throwError';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+      'Access-Control-Allow-Origin' : '*'
+    })
+  };
 
   constructor(private url: string,
     private http: HttpClient) { }
@@ -33,22 +41,25 @@ export class DataService {
       }
 
   create(resource) {
-    this.http.post(this.url, resource)
+    return this.http.post(this.url, resource, this.httpOptions)
       .pipe(
         map(response => response),
         catchError(this.handleError)
       );
     }
 
-update(resource) {
-  return this.http.patch(this.url, resource)
+update(resource, id: number) {
+  return this.http.post(this.url + '/' + id, resource)
     .pipe(
       catchError(this.handleError)
     );
 }
 
   delete(id: number) {
-    // logic goes here
+    return this.http.delete(this.url + '/' + id, this.httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
     private handleError(error: Response) {
@@ -58,7 +69,6 @@ update(resource) {
         if (error.status === 404) {
           return throwError(new NotFoundError(error));
         }
-
         return throwError(new AppError(error));
 
     }
