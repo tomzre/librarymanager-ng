@@ -27,6 +27,7 @@ export class BookListComponent implements OnInit {
      this.bookService.getAll().subscribe(
       data => {
         this.bookArr = data as Book[];
+        console.log(data);
       },
       (error: AppError) => {
         if (error instanceof NotFoundError) {
@@ -49,16 +50,20 @@ export class BookListComponent implements OnInit {
       return;
     }
 
-   const books: Book[] = JSON.parse(localStorage.getItem('books'));
+    const bookById = this.bookArr.find(x => x.id === id);
 
-   const bookById = books.find(x => x.id === id);
-
-    console.log(bookById.id);
-
-    books.splice(books.indexOf(bookById), 1);
-
-    localStorage.setItem('books', JSON.stringify(books));
-    this.bookArr = JSON.parse(localStorage.getItem('books'));
+    this.bookService.delete(id)
+      .subscribe(data => {
+          this.bookArr.splice(this.bookArr.indexOf(bookById), 1);
+        },
+        (error: AppError) => {
+          if (error instanceof NotFoundError) {
+            throw error;
+          } else {
+            throw error;
+          }
+        }
+      );
   }
 
 }

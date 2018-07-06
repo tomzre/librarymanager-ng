@@ -3,6 +3,7 @@
   <tr>
     <th>#</th>
     <th>Title</th>
+    <th>Author</th>
     <th>Language</th>
     <th>Actions</th>
   </tr>
@@ -15,6 +16,12 @@
         <td class="align-middle">
             {{book.title}}
             <img class="img-thumbnail rounded float-left" [src]='book.imageSource' width="150" height="220"/>
+        </td>
+        <td>
+          <p>
+            {{book.authorDto.name}}
+            {{book.authorDto.surname}}
+          </p>
         </td>
         <td>
           {{book.language}}

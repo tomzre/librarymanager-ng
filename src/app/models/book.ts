@@ -1,31 +1,16 @@
+import { Author } from './author';
+
 export class Book {
 
-  id: number;
-  title: string;
-  authorId: number;
-  year: number;
-  language: string;
-  pages: number;
-  typeId: number;
-  imageSource: string;
-
-  constructor(id: number,
-            title: string,
-            authorId: number,
-            year: number,
-            language: string,
-            pages: number,
-            typeId: number,
-          imageSource: string) {
-
-    this.id = id;
-    this.title = title;
-    this.authorId = authorId;
-    this. year = year;
-    this.language = language;
-    this.pages = pages;
-    this.typeId = typeId;
-    this.imageSource = imageSource;
+  constructor(public id: number,
+            public title: string,
+            public authorId: number,
+            public year: number,
+            public language: string,
+            public pages: number,
+            public typeId: number,
+          public imageSource: string,
+          public authorDto: Author) {
   }
 
 }

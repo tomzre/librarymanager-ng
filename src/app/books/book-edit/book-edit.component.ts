@@ -12,7 +12,7 @@ import { AppError } from '../../common/app-error';
 })
 export class BookEditComponent implements OnInit {
 
-  book: Book;
+  book: Book = new Book(0, '', 0, 0, '', 0, 0, '', null);
   books: Book[];
   router: Router;
   private id: number;
@@ -42,11 +42,17 @@ export class BookEditComponent implements OnInit {
     );
   }
 
-  private onSubmit(): void {
+  onSubmit(): void {
+    this.updateBook(this.book);
+  }
 
-    this.bookService.getAll().subscribe(
+  private updateBook(book: Book): void {
+
+    console.log(book);
+
+    this.bookService.update(book, book.id).subscribe(
       data => {
-        this.book = data as Book;
+        this.router.navigate(['book']);
       },
       (error: AppError) => {
         if (error instanceof NotFoundError) {
@@ -56,19 +62,6 @@ export class BookEditComponent implements OnInit {
         }
       }
     );
-    // tslint:disable-next-line:triple-equals
-    const bookId: number = this.books.findIndex(x => x.id == this.id);
-    console.log(bookId);
-    console.log(this.books[bookId]);
-
-    this.bookService.create(this.book);
-
-    console.log(this.books[bookId]);
-
-    // this.bookService.saveBooks(this.books);
-
-    this.router.navigate(['book']);
-
   }
 
 }

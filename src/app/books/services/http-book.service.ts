@@ -7,13 +7,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 })
 export class HttpBookService extends DataService {
 
-    readonly httpOptions = {
-      header: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
-
-    constructor(http: HttpClient) {
+   constructor(http: HttpClient) {
       super('http://localhost:50165/books', http);
      }
 }
