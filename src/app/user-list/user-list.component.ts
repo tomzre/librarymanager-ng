@@ -3,6 +3,7 @@ import { UsersService } from './../users/services/users.service';
 import { Component, OnInit } from '@angular/core';
 import { AppError } from '../common/app-error';
 import { NotFoundError } from '../common/not-found-error';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-user-list',
@@ -11,21 +12,22 @@ import { NotFoundError } from '../common/not-found-error';
 })
 export class UserListComponent implements OnInit {
 
+  users: User[];
+
   constructor(private usersSerivice: UsersService) { }
 
   ngOnInit() {
-    this.usersSerivice.getAll();
-    this.usersSerivice.getById(5).subscribe(response => {
+    this.usersSerivice.getAll().subscribe(response => {
       // TODO: Assign user to variable.
-      console.log(response);
+      this.users = response as User[];
     },
-  (error: AppError) => {
-    if (error instanceof BadRequestError) {
-      throw error;
-    } else {
-      throw error;
-    }
-  });
+    (error: AppError) => {
+      if (error instanceof BadRequestError) {
+        throw error;
+      } else {
+        throw error;
+      }
+    });
   }
 
   // ,

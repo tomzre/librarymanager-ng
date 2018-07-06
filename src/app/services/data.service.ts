@@ -18,18 +18,34 @@ export class DataService {
 
   getById(id) {
     return this.http.get(this.url + '/' + id)
-      .pipe(catchError(this.handleError));
+      .pipe(
+        map(response => response),
+        catchError(this.handleError)
+    );
   }
 
   getAll() {
       return this.http.get(this.url)
-        .pipe(catchError(this.handleError));
+        .pipe(
+          map(response => response),
+          catchError(this.handleError)
+        );
       }
 
-  create(body) {
-    this.http.post(this.url, body)
-      .pipe(catchError(this.handleError));
+  create(resource) {
+    this.http.post(this.url, resource)
+      .pipe(
+        map(response => response),
+        catchError(this.handleError)
+      );
     }
+
+update(resource) {
+  return this.http.patch(this.url, resource)
+    .pipe(
+      catchError(this.handleError)
+    );
+}
 
   delete(id: number) {
     // logic goes here
