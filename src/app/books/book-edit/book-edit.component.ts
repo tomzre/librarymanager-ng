@@ -1,3 +1,5 @@
+import { Author } from './../../models/author';
+import { AuthorService } from './../../authors/services/author.service';
 import { HttpBookService } from './../services/http-book.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -13,16 +15,29 @@ import { AppError } from '../../common/app-error';
 export class BookEditComponent implements OnInit {
 
   book: Book = new Book(0, '', 0, 0, '', 0, 0, '', null);
+  authors: Author[];
   books: Book[];
   router: Router;
   private id: number;
 
-  constructor(private bookService: HttpBookService, private route: ActivatedRoute, router: Router) {
+  constructor(private bookService: HttpBookService, private authorService: AuthorService, private route: ActivatedRoute, router: Router) {
     this.router = router;
   }
 
   ngOnInit() {
     this.route.params.subscribe(params => this.id = params.id);
+    this.authorService.getAll().subscribe(
+      ex => {
+        this.authors = ex as Author[];
+      },
+      (error: AppError) => {
+        if (error instanceof NotFoundError) {
+          throw error;
+        } else {
+          throw error;
+        }
+      }
+    );
 
     this.getBook(this.id);
   }
@@ -47,8 +62,6 @@ export class BookEditComponent implements OnInit {
   }
 
   private updateBook(book: Book): void {
-
-    console.log(book);
 
     this.bookService.update(book, book.id).subscribe(
       data => {

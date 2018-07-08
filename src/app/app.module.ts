@@ -1,3 +1,4 @@
+import { AuthorsModule } from './authors/authors.module';
 import { AppErrorHandler } from './common/app-error-handler';
 import { DataService } from './services/data.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -21,6 +22,7 @@ import { UsersModule } from './users/users.module';
     BrowserModule,
     BooksModule,
     UsersModule,
+    AuthorsModule,
     AppRoutingModule,
     HttpClientModule
   ],

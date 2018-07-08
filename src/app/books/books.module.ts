@@ -1,3 +1,4 @@
+import { AuthorService } from './../authors/services/author.service';
 import { FormsModule } from '@angular/forms';
 import { HttpBookService } from './services/http-book.service';
 
@@ -14,6 +15,9 @@ import { BookAddComponent } from './book-add/book-add.component';
   ],
   declarations: [BookListComponent, BookEditComponent, BookAddComponent],
   exports: [BookListComponent],
-  providers: [HttpBookService]
+  providers: [
+    HttpBookService,
+    AuthorService
+  ]
 })
 export class BooksModule { }
